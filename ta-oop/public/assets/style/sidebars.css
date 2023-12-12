@@ -34,8 +34,31 @@
 .list-item {
   font-weight: bold;
 }
-.list-item a {
+.list-item a,
+.list-item button {
   color: black !important;
+}
+.list-item button {
+  border: none;
+  background-color: transparent;
+  font-weight: bold;
+}
+.list-item button:hover,
+.list-item a:hover {
+  color: #003049 !important;
+}
+.list-item button::after,
+.list-item a::after {
+  content: "";
+  display: block;
+  padding-bottom: 0.2em;
+  border-bottom: 0.2em solid #003049;
+  transform: scale(0);
+  transition: 0.2s linear;
+}
+.list-item button:hover:after,
+.list-item a:hover::after {
+  transform: scale(0.7);
 }
 .grup {
   margin-bottom: 1.5rem;

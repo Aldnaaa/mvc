@@ -129,7 +129,7 @@
 </head>
 <body class="d-flex align-items-center justify-content-center bc-navy">
 <main class="form-signin">
-    <form class="wrap py-4 px-5 rounded-4" style="width: 30rem" action ="http://localhost/ta-oop/public/login/signIn" method="post">
+    <form class="wrap py-4 px-5 rounded-4" style="width: 30rem" action ="<?= BASEURL; ?>/login/signIn" method="post">
         <div class="d-flex justify-content-center align-items-center mb-4">
             <img src="../public/assets/image/logo.png" alt="logo" class="img-fluid me-0 mt-2" style="height: 60px"/>
             <h4 class="h3 mt-3 color-dongker c-navy"><b>Login Simacan</b></h4>
