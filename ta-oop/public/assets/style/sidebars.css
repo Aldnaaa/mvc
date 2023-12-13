@@ -98,18 +98,18 @@ td {
 }
 
 a.hapus {
-  background-color: red;
+  background-color: #eb1026;
   padding: 5px 15px;
   border-radius: 8px;
   color: white;
   transition: 0.3s;
 }
 a.hapus:hover {
-  background-color: rgb(218, 0, 0);
+  background-color: #ac1121;
 }
 a.edit,
 button.edit {
-  background-color: yellow;
+  background-color: #ffc107;
   padding: 5px 15px;
   border-radius: 8px;
   margin-right: 0.5rem;
@@ -119,7 +119,7 @@ button.edit {
 }
 a.edit:hover,
 button.edit {
-  background-color: rgb(236, 213, 0);
+  background-color: #e9af00;
 }
 a {
   text-decoration: none;

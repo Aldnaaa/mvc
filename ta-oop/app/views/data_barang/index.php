@@ -31,7 +31,7 @@
                 </li>
               </ul>
               <div class="grup pe-0 d-flex">
-                <button type="button" class="me-3 rounded-3 px-3 py-1 add-barang" data-bs-toggle="modal" data-bs-target="#addModal">Add Product</button>
+                <button type="button" class="me-3 rounded-3 px-3 py-1 cari-barang" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fa-solid fa-plus"></i> Add Product</button>
                 <form action="<?= BASEURL; ?>/DataBarang" method="post">
                     <input type="text" name="search" id="search" placeholder="Search..." class="px-3 py-1 rounded-3 search" style="width: 13rem" />
                     <button type="submit" class="me-3 rounded-3 px-3 py-1 cari-barang">
@@ -49,7 +49,7 @@
                 <th>Nama</th>
                 <th>Harga Beli</th>
                 <th>Harga Jual</th>
-                <th>Nama Supplier</th>
+                <th>Supplier</th>
                 <th>Stock</th>
                 <th>Option</th>
               </tr>
@@ -58,36 +58,35 @@
             <?php
             $no = 1;
             foreach ($data['barang'] as $item) { ?>
-                <tr>
-                    <td><?php echo $no++; ?></td>
-                    <td><img src='uploads/<?php echo $item['gambar']; ?>' alt='' style='width: 4rem' class='rounded-3' /></td>
-                    <td><?php echo $item['nama_barang']; ?></td>
-                    <td>Rp. <?php echo number_format($item['harga_beli']); ?></td>
-                    <td>Rp. <?php echo number_format($item['harga_jual']); ?></td>
-                    <?php
-                    $supplierName = "";
-                    foreach ($data['suppliers'] as $supplier) {
-                        if ($supplier['id_supplier'] == $item['id_supplier']) {
-                            $supplierName = $supplier['nama_supplier'];
-                            break;
-                        }
-                    }
-                    ?>
-                    <td><?php echo $supplierName; ?></td>
-                    <td><?php echo $item['stok_barang']; ?></td>
-                    <td>
-                      <a href="<?= BASEURL; ?>/mahasiswa/hapus/<?= $mhs['id'];?>" class='edit'>Edit</a>
-                      <a href="<?= BASEURL; ?>/dataBarang/deleteBarang/<?= $item['id_barang'];?>" class='hapus' onclick='return confirm("Hapus Data Barang ?");'>Delete</a>
-                    </td>
-                </tr>
-                <?php
+            <tr>
+              <td><?php echo $no++; ?></td>
+              <td><img src='uploads/<?php echo $item['gambar']; ?>' alt='' style='width: 4rem' class='rounded-3' /></td>
+              <td><?php echo $item['nama_barang']; ?></td>
+              <td>Rp. <?php echo number_format($item['harga_beli']); ?></td>
+              <td>Rp. <?php echo number_format($item['harga_jual']); ?></td>
+              <?php
+              $supplierName = "";
+              foreach ($data['suppliers'] as $supplier) {
+                  if ($supplier['id_supplier'] == $item['id_supplier']) {
+                      $supplierName = $supplier['nama_supplier'];
+                      break;
+                  }
               }
-            ?>
-            </tbody>
-
-          </table>
-        </div>
+              ?>
+              <td><?php echo $supplierName; ?></td>
+              <td><?php echo $item['stok_barang']; ?></td>
+              <td>
+                <a href="<?= BASEURL; ?>/mahasiswa/hapus/<?= $mhs['id'];?>" class='edit'>Edit</a>
+                <a href="<?= BASEURL; ?>/dataBarang/deleteBarang/<?= $item['id_barang'];?>" class='hapus' onclick='return confirm("Hapus Data Barang ?");'>Delete</a>
+              </td>
+            </tr>
+            <?php
+          }
+          ?>
+          </tbody>
+        </table>
       </div>
+    </div>
 
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

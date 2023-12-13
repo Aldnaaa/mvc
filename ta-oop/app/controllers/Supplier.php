@@ -4,8 +4,6 @@ class Supplier extends Controller
 {
     public function index(){
         $this->view('template/header');
-        $this->view('supplier/index');
-        $dataSupplier = $this->model('SupplierModel')->getSuppliers();
 
         // Inisialisasi variabel
         $searchTerm = '';
@@ -13,28 +11,43 @@ class Supplier extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search'])) {
             // Jika ada data pencarian, panggil fungsi untuk mendapatkan data barang berdasarkan pencarian
             $searchTerm = $_POST['search'];
-            $dataSupplier = $this->model('SupplierModel')->searchDataSupplier($searchTerm);
+            $data['suppliers'] = $this->model('SupplierModel')->searchDataSupplier($searchTerm);
         } else {
             // Jika tidak ada data pencarian, panggil fungsi untuk mendapatkan semua data supplier
-            $dataSupplier = $this->model('SupplierModel')->getSuppliers();
+            $data['suppliers'] = $this->model('SupplierModel')->getSuppliers();
         }
 
-        $no = 1;
-        foreach ($dataSupplier as $supplierData) {
-            echo "<tr class='py-3' style='height: 3rem'>";
-            echo "<td>" . $no . "</td>";
-            echo "<td>" . $supplierData['nama_supplier'] . "</td>";
-            echo "<td>" . $supplierData['tanggal_input'] . "</td>";
-            echo "<td>
-                        <a href='admin/fungsi/editSupplier.php?action=edit&id=" . $supplierData['id_supplier'] . "' class='edit'>Edit</a>
-                        <a href='http://localhost/ta-oo/public/" . $supplierData['id_supplier'] . "' class='hapus' onclick='return confirm(\"Hapus Data Supplier ?\");'>Delete</a>
-                    </td>";
-            echo "</tr>";
-            $no++;
-        }
-
-
-        $this->view('supplier/footer');
+        $this->view('supplier/index',$data);
         $this->view('template/footer');
+    }
+
+    public function tambahSupplier(){
+        if (isset($_POST['submit']) && $_POST['submit'] == 'Simpan') {
+            $supplierName = $_POST['nama-supplier'];
+            $supplierTelepon = $_POST['telepon'];
+
+            $result = $this->model('SupplierModel')->tambahSupplier($supplierName,$supplierTelepon);
+
+            if ($result) {
+                header("Location: ../Supplier");
+                exit();
+            } else {
+                echo "Gagal menambahkan data supplier.";
+            }
+        }
+    }
+
+    public function deleteSupplier($id){
+        $idSupplierToDelete = $id;
+
+        // Memanggil method untuk menghapus barang
+        if ($this->model('SupplierModel')->deleteSuppliers($idSupplierToDelete)) {
+            // Redirect atau tampilkan pesan berhasil
+            header('Location: ' . BASEURL . '/Supplier');
+            exit();
+        } else {
+            // Tampilkan pesan gagal
+            echo "Gagal menghapus barang";
+        }
     }
 }

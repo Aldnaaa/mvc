@@ -9,13 +9,14 @@ class SupplierModel
         $this->db = new Database;
     }
 
-    public function tambahSupplier($nama)
+    public function tambahSupplier($nama,$telepon)
     {
         $datetime = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO supplier (nama_supplier, tanggal_input) VALUES (?, ?)";
+        $sql = "INSERT INTO supplier (nama_supplier, telepon, tanggal_input) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(1, $nama, PDO::PARAM_STR);
-        $stmt->bindParam(2, $datetime, PDO::PARAM_STR);
+        $stmt->bindParam(2, $telepon, PDO::PARAM_STR);
+        $stmt->bindParam(3, $datetime, PDO::PARAM_STR);
 
         // Eksekusi query
         if ($stmt->execute()) {
