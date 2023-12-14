@@ -62,15 +62,16 @@ class SupplierModel
         return $result;
     }
 
-    public function updateSupplier($idSupplier, $nama)
+    public function updateSupplier($idSupplier, $nama,$telepon)
     {
         // Update data supplier berdasarkan ID
         $datetime = date('Y-m-d H:i:s');
-        $sql = "UPDATE supplier SET nama_supplier = ?, tanggal_input = ? WHERE id_supplier = ?";
+        $sql = "UPDATE supplier SET nama_supplier = ?, tanggal_input = ?, telepon = ? WHERE id_supplier = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(1, $nama, PDO::PARAM_STR);
         $stmt->bindParam(2, $datetime, PDO::PARAM_STR);
-        $stmt->bindParam(3, $idSupplier, PDO::PARAM_INT);
+        $stmt->bindParam(3, $telepon, PDO::PARAM_STR);
+        $stmt->bindParam(4, $idSupplier, PDO::PARAM_INT);
 
         return $stmt->execute();
     }

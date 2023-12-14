@@ -88,7 +88,7 @@
           <div class="order-menu bg-white p-3 ms-0" style="width: 22%; height: 88%">
             <div class="header-order-menu border-bot">
               <h5 class="fw-bold">Order Menu</h5>
-              <p class="date-menu">01/Sep/2023</p>
+              <p class="date-menu"><?= $data['date']; ?></p>
             </div>
             <div class="items pt-3" style="height: 72%">
               <div class="title d-flex align-items-center justify-content-between">

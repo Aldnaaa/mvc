@@ -70,5 +70,18 @@ class TransaksiModel {
 
         return $row['total_rows'];
     }
+
+    function getCurrentTime() {
+        $namaHari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
+        // Format tanggal
+        $tanggal = date("j F Y");
+        // Mendapatkan indeks hari saat ini (0 untuk Minggu, 1 untuk Senin, dst.)
+        $indeksHari = date("w");
+        // Mengambil nama hari dari array menggunakan indeks
+        $hariIni = $namaHari[$indeksHari];
+        // Mengembalikan waktu saat ini dalam format yang diinginkan
+        return $hariIni . ', ' . $tanggal;
+    }
+    
 }
 ?>

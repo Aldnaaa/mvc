@@ -60,27 +60,26 @@
                     $no = 1;
                     foreach ($data['barang'] as $item) { ?>
                     <tr>
-                    <td><?php echo $no++; ?></td>
-                    <td><img src='uploads/<?php echo $item['gambar']; ?>' alt='' style='width: 4rem' class='rounded-3' /></td>
-                    <td><?php echo $item['nama_barang']; ?></td>
-                    <td>Rp. <?php echo number_format($item['harga_beli']); ?></td>
-                    <td>Rp. <?php echo number_format($item['harga_jual']); ?></td>
-                    <?php
-                    $supplierName = "";
-                    foreach ($data['suppliers'] as $supplier) {
-                        if ($supplier['id_supplier'] == $item['id_supplier']) {
-                            $supplierName = $supplier['nama_supplier'];
-                            break;
+                        <td><?php echo $no++; ?></td>
+                        <td><img src='uploads/<?php echo $item['gambar']; ?>' alt='' style='width: 4rem' class='rounded-3' /></td>
+                        <td><?php echo $item['nama_barang']; ?></td>
+                        <td>Rp. <?php echo number_format($item['harga_beli']); ?></td>
+                        <td>Rp. <?php echo number_format($item['harga_jual']); ?></td>
+                        <?php
+                        $supplierName = "";
+                        foreach ($data['suppliers'] as $supplier) {
+                            if ($supplier['id_supplier'] == $item['id_supplier']) {
+                                $supplierName = $supplier['nama_supplier'];
+                                break;
+                            }
                         }
-                    }
-                    ?>
-                    <td><?php echo $supplierName; ?></td>
-                    <td><?php echo $item['stok_barang']; ?></td>
-                    <td>
-                        <a href="#" class='edit' data-bs-toggle="modal" data-bs-target="#editModal" data-id="<?= $item['id_barang']; ?>">Edit</a>
-                        <!-- <a href="<?= BASEURL; ?>/mahasiswa/hapus/<?= $mhs['id'];?>" class='edit'>Edit</a> -->
-                        <a href="<?= BASEURL; ?>/dataBarang/deleteBarang/<?= $item['id_barang'];?>" class='hapus' onclick='return confirm("Hapus Data Barang ?");'>Delete</a>
-                    </td>
+                        ?>
+                        <td><?php echo $supplierName; ?></td>
+                        <td><?php echo $item['stok_barang']; ?></td>
+                        <td>
+                            <a href="#" class='edit ' data-bs-toggle="modal" data-bs-target="#editModal<?= $item['id_barang']; ?>" data-id="<?= $item['id_barang']; ?>">Edit</a>
+                            <a href="<?= BASEURL; ?>/dataBarang/deleteBarang/<?= $item['id_barang'];?>" class='hapus' onclick='return confirm("Hapus Data Barang ?");'>Delete</a>
+                        </td>
                     </tr>
                     <?php
                 }
@@ -92,6 +91,7 @@
     </div>
 
   </main>
+
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -147,7 +147,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <?php foreach ($data['barang'] as $item) { ?>                               
+    <div class="modal fade" id="editModal<?= $item['id_barang']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
               <div class="modal-header">
@@ -157,38 +158,40 @@
               <div class="modal-body">
                   <form action="<?= BASEURL; ?>/DataBarang/updateBarang" method="post" enctype="multipart/form-data" id="editForm">
                       <!-- Add a hidden field to store the ID -->
-                      <input type="hidden" name="idBarang" id="idBarang-edit">
+                      <input type="hidden" name="idBarang" id="idBarang-edit" value="<?= $item['id_barang']; ?>">
                       <div class="mb-1">
                           <label for="nama-barang-edit" class="col-form-label">Nama Barang</label>
-                          <input type="text" class="form-control" id="nama-barang-edit" name="nama-barang" />
+                          <input type="text" class="form-control" id="nama-barang-edit" name="nama-barang" value="<?= $item['nama_barang']; ?>"/>
                       </div>
                       <div class="mb-1">
                           <label for="kategori-edit" class="col-form-label">Kategori</label><br />
-                          <select id="kategori-edit" name="kategori" class="px-2 py-1 rounded-2" style="width: 29rem">
-                              <option value="1">Makanan</option>
-                              <option value="2">Minuman</option>
-                              <option value="3">Snack</option>
-                          </select>
+                          <select id="kategori-edit" name="id_kategori" class="px-2 py-1 rounded-2" style="width: 29rem">
+                            <option value="1" <?= $item['id_kategori'] == 1 ? 'selected' : '' ?>>Makanan</option>
+                            <option value="2" <?= $item['id_kategori'] == 2 ? 'selected' : '' ?>>Minuman</option>
+                            <option value="3" <?= $item['id_kategori'] == 3 ? 'selected' : '' ?>>Snack</option>
+                        </select>
                       </div>
                       <div class="mb-1">
                           <label for="harga-beli-edit" class="col-form-label">Harga Beli</label>
-                          <input type="text" class="form-control" id="harga-beli-edit" name="harga-beli" />
+                          <input type="text" class="form-control" id="harga-beli-edit" name="harga-beli" value="<?= $item['harga_beli']; ?>"/>
                       </div>
                       <div class="mb-1">
                           <label for="harga-jual-edit" class="col-form-label">Harga Jual</label>
-                          <input type="text" class="form-control" id="harga-jual-edit" name="harga-jual" />
+                          <input type="text" class="form-control" id="harga-jual-edit" name="harga-jual" value="<?= $item['harga_jual']; ?>"/>
                       </div>
                       <div class="mb-1">
                           <label for="supplier-edit" class="col-form-label">Supplier</label><br />
                           <select id="supplier-edit" name="supplier" class="px-2 py-1 rounded-2" style="width: 29rem">
                               <?php foreach ($data['suppliers'] as $option): ?>
-                                  <option value="<?= $option['id_supplier'] ?>"><?= $option['nama_supplier'] ?></option>
+                                <option value="<?= $option['id_supplier'] ?>" <?= ($option['id_supplier'] == $item['id_supplier']) ? 'selected' : '' ?>>
+                                  <?= $option['nama_supplier'] ?>
+                                </option>
                               <?php endforeach; ?>
                           </select>
                       </div>
                       <div class="mb-1">
                           <label for="stock-edit" class="col-form-label">Stock</label>
-                          <input type="text" class="form-control" id="stock-edit" name="stock" />
+                          <input type="text" class="form-control" id="stock-edit" name="stock" value="<?= $item['stok_barang']; ?>"/>
                       </div>
                       <div class="mb-1">
                           <label for="foto-barang-edit" class="col-form-label">Foto</label>
@@ -196,13 +199,14 @@
                       </div>
                       <div class="mb-1 d-flex justify-content-end mt-3 gap-2">
                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                          <button type="submit" class="btn btn-primary" name="submit" value="simpan">Simpan</button>
+                          <button type="submit" class="btn btn-primary" name="submit" value="update">Update</button>
                       </div>
                   </form>
               </div>
           </div>
       </div>
-  </div>
+    </div>
+    <?php } ?>
 
   <script>
     $(document).ready(function () {

@@ -1,33 +1,3 @@
-<?php
-//
-//session_start();
-//require_once 'config/config.php';
-//
-//$database = new database();
-//
-//if (isset($_POST['btn-login'])) {
-//    $username = $_POST['username'];
-//    $password = md5($_POST['password']);
-//
-//    $sql = "SELECT * FROM user WHERE username='$username' AND password='$password'";
-//    $result = $database->conn->query($sql);
-//
-//    if ($result->num_rows > 0) {
-//        $row = $result->fetch_assoc();
-//        $_SESSION['user_session'] = $row['id_user'];
-//        $_SESSION['level'] = $row['level']; // Tambahkan baris ini untuk menyimpan level pengguna
-//
-//        echo '<script>alert("Login Sukses");window.location="index.php"</script>';
-//        // Langsung arahkan ke index.php setelah login
-//        // header("Location: index.php");
-//        exit;
-//    } else {
-//        echo '<script>alert("Login Gagal");history.go(-1);</script>';
-//    }
-//}
-//?>
-
-
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
 <head>
@@ -45,7 +15,7 @@
 
     <link href="../public/assets/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <style>
+    <!-- <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -122,7 +92,7 @@
         .bd-mode-toggle .dropdown-menu .active .bi {
             display: block !important;
         }
-    </style>
+    </style> -->
 
     <!-- Custom styles for this template -->
     <link href="../public/assets/style/sign-in.css" rel="stylesheet"/>

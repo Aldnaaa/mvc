@@ -197,5 +197,40 @@ class HistoryModel {
     
         return $result ? $result : array();
     }
+
+    public function getHistoryBySupplierDate($date, $idx){
+        $sql = "
+        SELECT 
+            t.tanggal_transaksi, 
+            t.id_transaksi,
+            CASE
+                WHEN LENGTH(GROUP_CONCAT(' ', b.nama_barang)) > 40 
+                THEN 
+                    CONCAT(LEFT(GROUP_CONCAT(' ', b.nama_barang), 40), ' ...')
+                ELSE 
+                    GROUP_CONCAT(' ',b.nama_barang)
+            END AS nama_barang,
+            SUM(qty * b.harga_jual) AS harga_jual,
+            SUM(qty * b.harga_beli) AS harga_beli,
+            SUM(dt.qty) AS total_qty
+        FROM 
+            transaksi t
+        INNER JOIN detail_transaksi dt ON t.id_transaksi = dt.id_transaksi
+        INNER JOIN barang b ON dt.id_barang = b.id_barang
+        INNER JOIN supplier s ON s.id_supplier = b.id_supplier
+        WHERE s.id_supplier = :idx AND DATE(t.tanggal_transaksi) = :date
+        GROUP BY t.id_transaksi, t.tanggal_transaksi;
+        ";
+    
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':idx', $idx, PDO::PARAM_INT);
+        $stmt->bindParam(':date', $date, PDO::PARAM_STR);
+        $stmt->execute();
+    
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $result;
+    }
+    
 }
 ?>

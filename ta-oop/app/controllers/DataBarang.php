@@ -55,19 +55,19 @@ class DataBarang extends Controller
     }
 
 
-    public function editBarang(){
-        if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
-            $id_barang = $_GET['id'];
+    // public function editBarang(){
+    //     if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
+    //         $id_barang = $_GET['id'];
 
-            // Ambil data barang berdasarkan ID
-            $data_barang = $this->model('BarangModel')->getBarangById($id_barang);
+    //         // Ambil data barang berdasarkan ID
+    //         $data_barang = $this->model('BarangModel')->getBarangById($id_barang);
 
-            if (!$data_barang) {
-                echo "Barang tidak ditemukan.";
-                exit();
-            }
-        }
-    }
+    //         if (!$data_barang) {
+    //             echo "Barang tidak ditemukan.";
+    //             exit();
+    //         }
+    //     }
+    // }
 
 
     public function deleteBarang($id){
@@ -90,35 +90,48 @@ class DataBarang extends Controller
         echo json_encode($barang);
     }
 
-    public function updateBarang()
-    {
-        // Assuming you are using POST method for the form submission
+    public function updateBarang(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Ambil data dari form
             $idBarang = $_POST['idBarang'];
-            $nama = $_POST['nama-barang'];
-            $kategori = $_POST['kategori'];
+            $namaBarang = $_POST['nama-barang'];
+            $idKategori = $_POST['id_kategori'];
             $hargaBeli = $_POST['harga-beli'];
             $hargaJual = $_POST['harga-jual'];
             $supplier = $_POST['supplier'];
-            $stock = $_POST['stock'];
-            
-            // Handle file upload (you need to implement this)
-            $foto = ''; // handle file upload as needed
-
-            $success = $this->model("BarangModel")->updateBarang($idBarang, $nama, $kategori, $hargaBeli, $hargaJual, $supplier, $stock, $foto);
-
-            if ($success) {
-                echo json_encode(['status' => 'success', 'message' => 'Data updated successfully']);
+            $stokBarang = $_POST['stock'];
+            $gambarBarang = '';
+    
+            // Cek apakah ada file yang di-upload
+            if (isset($_FILES['foto-barang']) && $_FILES['foto-barang']['error'] == 0) {
+                // Simpan foto ke direktori tertentu (misalnya 'uploads/')
+                $targetDir = "../public/uploads/";
+                $gambarBarang = basename($_FILES["foto-barang"]["name"]);
+                $targetFile = $targetDir . $gambarBarang;
+                
+                if (move_uploaded_file($_FILES["foto-barang"]["tmp_name"], $targetFile)) {
+                    // File berhasil di-upload
+                } else {
+                    echo "File upload failed.";
+                    exit();
+                }
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to update data']);
+                // If no new photo uploaded, retain the existing photo
+                $existingData = $this->model('BarangModel')->getBarangById($idBarang);
+                $gambarBarang = $existingData['gambar'];
             }
+    
+            // Panggil method untuk memperbarui barang
+            $this->model('BarangModel')->updateBarang($idBarang, $namaBarang, $idKategori, $hargaBeli,$hargaJual,$supplier, $stokBarang, $gambarBarang);
+    
+            // Redirect atau tampilkan pesan berhasil
+            header('Location: ' . BASEURL . '/DataBarang');
+            exit();
         } else {
-            // Handle non-POST request accordingly
-            // (Redirect, show an error message, etc.)
+            // Tampilkan pesan gagal
+            echo "Akses tidak sah.";
         }
     }
-
-
 
 
     

@@ -50,4 +50,23 @@ class Supplier extends Controller
             echo "Gagal menghapus barang";
         }
     }
+
+    public function updateSupplier(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Ambil data dari form
+            $id_supplier = $_POST['id_supplier'];
+            $nama_supplier = $_POST['nama_supplier'];
+            $telepon = $_POST['telepon'];
+    
+            // Panggil method untuk memperbarui barang
+            $this->model('SupplierModel')->updateSupplier($id_supplier, $nama_supplier,$telepon);
+    
+            // Redirect atau tampilkan pesan berhasil
+            header('Location: ' . BASEURL . '/Supplier');
+            exit();
+        } else {
+            // Tampilkan pesan gagal
+            echo "Akses tidak sah.";
+        }
+    }
 }

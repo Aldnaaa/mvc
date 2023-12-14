@@ -15,7 +15,6 @@
               <select id="supplier" name="supplier" class="px-3 py-1 rounded-3 pilih-bulan me-2" style="width: 10rem">
               <option value="">Supplier</option>
                 <?php
-                // $dataSup = $supplier->getSuppliers();
                 foreach ($data['suppliers'] as $item){
                   echo '<option value="'.$item['id_supplier'].'">'.$item['nama_supplier'].'</option>';
                 }        
@@ -58,15 +57,15 @@
                   <th>No</th>
                   <th>Date</th>
                   <th style="width: 27%">Nama Barang</th>
+                  <th>Jumlah</th>
                   <th>Total Beli</th>
                   <th>Total Harga</th>
-                  <th>Jumlah</th>
                   <th>Option</th>
                 </tr>
               </thead>
               <tbody>
               <?php
-                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter1'])) {
+                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter1']) && !empty($_POST['filter1'])) {
                   $no = 1;
                   $jumlahBeli = 0;
                   $jumlahJual = 0;
@@ -77,9 +76,9 @@
                           <td><?php echo $no++; ?></td>
                           <td><?php echo $item['tanggal_transaksi']; ?></td>
                           <td><?php echo $item['nama_barang']; ?></td>
+                          <td><?php echo $item['total_qty']; ?></td>
                           <td>Rp. <?php echo number_format($item['harga_beli']); ?></td>
                           <td>Rp. <?php echo number_format($item['harga_jual']); ?></td>
-                          <td><?php echo $item['total_qty']; ?></td>
                           <td><a href='admin/fungsi/detailHistory.php?action=detail&id=<?php echo $item['id_transaksi']; ?>' class='edit'>Detail</a></td>
                       </tr>
                       <?php
@@ -88,17 +87,15 @@
                   }
                   ?>
                   <tr>
-                      <td  colspan="3">Total Penjualan :</td>
-                      <td>Rp. <?php echo number_format($jumlahBeli); ?></td>
-                      <td>Rp. <?php echo number_format($jumlahJual); ?></td>
-                      <td></td>
+                      <td class="table-success" colspan="4">Total Penjualan :</td>
+                      <td class="table-success">Rp. <?php echo number_format($jumlahBeli); ?></td>
+                      <td class="table-success">Rp. <?php echo number_format($jumlahJual); ?></td>
                       <td></td>
                   </tr>
                   <tr>
-                      <td class="table-success" colspan="3">Total Keuntungan :</td>
-                      <td class="table-success"colspan="2" >Rp. <?php echo number_format($jumlahJual - $jumlahBeli); ?></td>
-                      <td></td>
-                      <td></td>
+                    <td class="bg-success-subtle" colspan="4">Total Keuntungan :</td>
+                    <td class="bg-success text-white"colspan="2" >Rp. <?php echo number_format($jumlahJual - $jumlahBeli); ?></td>
+                    <td></td>
                   </tr>
                   <?php
                     } else {
@@ -109,9 +106,9 @@
                                 <td><?php echo $no++; ?></td>
                                 <td><?php echo $item['tanggal_transaksi']; ?></td>
                                 <td><?php echo $item['nama_barang']; ?></td>
+                                <td><?php echo $item['total_qty']; ?></td>
                                 <td>Rp. <?php echo number_format($item['total_beli']); ?></td>
                                 <td>Rp. <?php echo number_format($item['total_transaksi']); ?></td>
-                                <td><?php echo $item['total_qty']; ?></td>
                                 <td><a href='admin/fungsi/detailHistory.php?action=detail&id=<?php echo $item['id_transaksi']; ?>' class='edit'>Detail</a></td>
                             </tr>
                             <?php

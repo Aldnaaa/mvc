@@ -83,21 +83,19 @@
 .color-black {
   color: black;
 }
+
 input.search,
+input.date,
 select.pilih-bulan,
 select.pilih-tahun {
   border: none;
   background-color: rgb(199, 199, 199);
 }
-
 th,
 td {
   padding-right: 3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-.custom-table {
-  background-color: transparent !important;
 }
 
 a.hapus {

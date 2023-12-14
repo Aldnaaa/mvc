@@ -2,29 +2,7 @@
 
 class Transaksi extends Controller
 {
-    // public function index(){
-    //   $this->view('template/header');
-    //   $searchTerm = '';
-    
-    //   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search'])) {
-    //       $searchTerm = $_POST['search'];
-    //       $data['barang'] = $this->model('BarangModel')->searchDataBarang($searchTerm);
-    //   } elseif (isset($_POST['kategori'])) {
-    //       $kategori = $_POST['kategori'];
-    //       $data['barang'] = $this->model('BarangModel')->getDataBarangByCategory($kategori);
-    //   } else {
-    //       $data['barang'] = $this->model('BarangModel')->getDataBarang();
-    //   }
-
-    //   $data['totalPrice'] = $this->calculateTotalPrice($_SESSION["cart"]);
-    //   $this->view('transaksi/index', $data);
-      
-    //   // $this->view('transaksi/cart');
-
-    //   $this->view('template/footer');
-    // }
-
-        public function index()
+    public function index()
     {
         $this->view('template/header');
         $searchTerm = '';
@@ -43,6 +21,7 @@ class Transaksi extends Controller
             $_SESSION["cart"] = array();
         }
 
+        $data['date'] = $this->model('TransaksiModel')->getCurrentTime();
         $data['totalPrice'] = $this->calculateTotalPrice($_SESSION["cart"]);
 
         // Membuat array baru untuk menyimpan data barang untuk keranjang
