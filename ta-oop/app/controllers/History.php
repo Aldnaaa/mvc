@@ -32,10 +32,12 @@ class History extends Controller
             } else {
               $data['history'] = $this->model('HistoryModel')->getHistory();
             } 
-          } else {
-            $data['history'] = $this->model('HistoryModel')->getHistory();
-          }
+            
+        } else {
+          $data['history'] = $this->model('HistoryModel')->getHistory();
+        }
 
+        $data['history2'] = $this->model('HistoryModel')->getHistory();
         $data['suppliers'] = $this->model('SupplierModel')->getSuppliers();
         $this->view('history/index',$data);
         $this->view('template/footer');
