@@ -84,7 +84,42 @@ class DataBarang extends Controller
         }
     }
 
-    public function filterBarang(){
-
+    public function getBarangById($idBarang)
+    {
+        $barang = $this->model("BarangModel")->getBarangById($idBarang);
+        echo json_encode($barang);
     }
+
+    public function updateBarang()
+    {
+        // Assuming you are using POST method for the form submission
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $idBarang = $_POST['idBarang'];
+            $nama = $_POST['nama-barang'];
+            $kategori = $_POST['kategori'];
+            $hargaBeli = $_POST['harga-beli'];
+            $hargaJual = $_POST['harga-jual'];
+            $supplier = $_POST['supplier'];
+            $stock = $_POST['stock'];
+            
+            // Handle file upload (you need to implement this)
+            $foto = ''; // handle file upload as needed
+
+            $success = $this->model("BarangModel")->updateBarang($idBarang, $nama, $kategori, $hargaBeli, $hargaJual, $supplier, $stock, $foto);
+
+            if ($success) {
+                echo json_encode(['status' => 'success', 'message' => 'Data updated successfully']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Failed to update data']);
+            }
+        } else {
+            // Handle non-POST request accordingly
+            // (Redirect, show an error message, etc.)
+        }
+    }
+
+
+
+
+    
 }

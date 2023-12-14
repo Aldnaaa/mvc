@@ -2,7 +2,7 @@
 
 //namespace core;
 
-class Database
+class Database 
 {
     public $error;
     private $host = DB_HOST;
@@ -80,5 +80,10 @@ class Database
     }
     public function prepare($query) {
         return $this->conn->prepare($query);
+    }
+
+    public function getLastInsertId()
+    {
+        return $this->conn->lastInsertId();
     }
 }

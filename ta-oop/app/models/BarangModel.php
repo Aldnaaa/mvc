@@ -70,27 +70,36 @@ class BarangModel
     public function getBarangById($idBarang)
     {
         // Ambil data barang berdasarkan ID
-        $sql = "SELECT * FROM barang WHERE id_barang = ?";
+        $sql = "SELECT * FROM barang WHERE id_barang = :id_barang";
         $stmt = $this->db->prepare($sql);
-        $stmt->bind_param("i", $idBarang);
+        $stmt->bindParam(":id_barang", $idBarang, PDO::PARAM_INT);
         $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_assoc();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return $result;
     }
+    
 
-    public function updateBarang($idBarang, $nama, $kategori, $hargaBeli, $hargaJual, $supplier, $stock, $foto)
-    {
+    public function updateBarang($idBarang, $nama, $kategori, $hargaBeli, $hargaJual, $supplier, $stock, $foto) {
         // Update data barang berdasarkan ID
-        $sql = "UPDATE barang SET nama_barang = ?, id_kategori = ?, harga_beli = ?, harga_jual = ?, id_supplier = ?, stok_barang = ?, gambar = ? WHERE id_barang = ?";
+        $sql = "UPDATE barang SET nama_barang = :nama, id_kategori = :kategori, harga_beli = :hargaBeli, harga_jual = :hargaJual, id_supplier = :supplier, stok_barang = :stock, gambar = :foto WHERE id_barang = :idBarang";
         $stmt = $this->db->prepare($sql);
-
-        // Assuming id_kategori, harga_beli, harga_jual, and stok_barang are integers,
-        // and supplier is a string, adjust the data types accordingly
-        $stmt->bind_param("siiiiisi", $nama, $kategori, $hargaBeli, $hargaJual, $supplier, $stock, $foto, $idBarang);
-
+    
+        // Bind parameters
+        $stmt->bindParam(':nama', $nama);
+        $stmt->bindParam(':kategori', $kategori);
+        $stmt->bindParam(':hargaBeli', $hargaBeli);
+        $stmt->bindParam(':hargaJual', $hargaJual);
+        $stmt->bindParam(':supplier', $supplier);
+        $stmt->bindParam(':stock', $stock);
+        $stmt->bindParam(':foto', $foto);
+        $stmt->bindParam(':idBarang', $idBarang);
+    
+        // Execute the statement
         return $stmt->execute();
     }
+    
+     
 
 
 //    public function searchDataBarang($searchTerm)
@@ -177,4 +186,27 @@ class BarangModel
             return 0; // Atau nilai default jika tidak ada hasil
         }
     }
+
+    public function updateStock($idBarang, $quantity) {
+        // Fetch the current stock from the database
+        $selectQuery = "SELECT stok_barang FROM barang WHERE id_barang = :idBarang";
+        $stmtSelect = $this->db->prepare($selectQuery);
+        $stmtSelect->bindParam(':idBarang', $idBarang, PDO::PARAM_INT);
+        $stmtSelect->execute();
+    
+        $currentStock = $stmtSelect->fetchColumn();
+    
+        if ($currentStock !== false) {
+            // Calculate the new stock after the purchase
+            $newStock = $currentStock - $quantity;
+    
+            // Update the stock in the database
+            $updateQuery = "UPDATE barang SET stok_barang = :newStock WHERE id_barang = :idBarang";
+            $stmtUpdate = $this->db->prepare($updateQuery);
+            $stmtUpdate->bindParam(':newStock', $newStock, PDO::PARAM_INT);
+            $stmtUpdate->bindParam(':idBarang', $idBarang, PDO::PARAM_INT);
+            $stmtUpdate->execute();
+        }
+    }
+    
 }
