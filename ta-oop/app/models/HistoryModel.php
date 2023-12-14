@@ -1,9 +1,9 @@
 <?php
-class History {
-    private $conn;
+class HistoryModel {
+    private $db;
 
-    public function __construct($conn) {
-        $this->conn = $conn;
+    public function __construct() {
+        $this->db = new Database;
     }
 
     // Metode lain tetap sama
@@ -30,79 +30,42 @@ class History {
             GROUP BY t.id_transaksi, t.tanggal_transaksi;
         ";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $result ? $result : array();
     }
 
-    public function searchHistoryByMonth($month) {
-        $sql = "  
-        SELECT 
-            t.tanggal_transaksi, 
-            t.id_transaksi,
-            CASE
-                WHEN LENGTH(GROUP_CONCAT(' ', b.nama_barang)) > 40 
-                THEN 
-                    CONCAT(LEFT(GROUP_CONCAT(' ', b.nama_barang), 40), ' ...')
-                ELSE 
-                    GROUP_CONCAT(' ',b.nama_barang)
-            END AS nama_barang,
-            t.total_transaksi,
-            SUM(qty * harga_beli) AS total_beli,
-            SUM(dt.qty) AS total_qty
-        FROM 
-            transaksi t
-        INNER JOIN detail_transaksi dt ON t.id_transaksi = dt.id_transaksi
-        INNER JOIN barang b ON dt.id_barang = b.id_barang
-        WHERE MONTH(tanggal_transaksi) = $month
-        GROUP BY t.id_transaksi, t.tanggal_transaksi;
+    public function searchHistoryByMonthYear($month, $year) {
+        $sql = "
+            SELECT 
+                t.tanggal_transaksi, 
+                t.id_transaksi,
+                CASE
+                    WHEN LENGTH(GROUP_CONCAT(' ', b.nama_barang)) > 40 
+                    THEN 
+                        CONCAT(LEFT(GROUP_CONCAT(' ', b.nama_barang), 40), ' ...')
+                    ELSE 
+                        GROUP_CONCAT(' ', b.nama_barang)
+                END AS nama_barang,
+                t.total_transaksi,
+                SUM(qty * harga_beli) AS total_beli,
+                SUM(dt.qty) AS total_qty
+            FROM 
+                transaksi t
+            INNER JOIN detail_transaksi dt ON t.id_transaksi = dt.id_transaksi
+            INNER JOIN barang b ON dt.id_barang = b.id_barang
+            WHERE MONTH(tanggal_transaksi) = :month AND YEAR(tanggal_transaksi) = :year
+            GROUP BY t.id_transaksi, t.tanggal_transaksi;
         ";
-        $result = $this->conn->query($sql);
-
-        // Cek jika ada data
-        if ($result) {
-            $data = array();
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
-            return $data;
-        } else {
-            return array();
-        }
-    }
-
-    public function searchHistoryByYear($year) {
-        $sql = "  
-        SELECT 
-            t.tanggal_transaksi, 
-            t.id_transaksi,
-            CASE
-                WHEN LENGTH(GROUP_CONCAT(' ', b.nama_barang)) > 40 
-                THEN 
-                    CONCAT(LEFT(GROUP_CONCAT(' ', b.nama_barang), 40), ' ...')
-                ELSE 
-                    GROUP_CONCAT(' ',b.nama_barang)
-            END AS nama_barang,
-            t.total_transaksi,
-            SUM(qty * harga_beli) AS total_beli,
-            SUM(dt.qty) AS total_qty
-        FROM 
-            transaksi t
-        INNER JOIN detail_transaksi dt ON t.id_transaksi = dt.id_transaksi
-        INNER JOIN barang b ON dt.id_barang = b.id_barang
-        WHERE YEAR(tanggal_transaksi) = $year
-        GROUP BY t.id_transaksi, t.tanggal_transaksi;        
-        ";
-        $result = $this->conn->query($sql);
-
-        // Cek jika ada data
-        if ($result) {
-            $data = array();
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
+    
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':month', $month, PDO::PARAM_INT);
+        $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+        
+        if ($stmt->execute()) {
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $data;
         } else {
             return array();
@@ -132,7 +95,7 @@ class History {
             GROUP BY t.id_transaksi, t.tanggal_transaksi;
         ";
     
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':month', $month, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -163,7 +126,7 @@ class History {
             GROUP BY t.id_transaksi, t.tanggal_transaksi;        
         ";
     
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':year', $year, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -195,7 +158,7 @@ class History {
             GROUP BY t.id_transaksi, t.tanggal_transaksi;
         ";
     
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':date', $date);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -227,7 +190,7 @@ class History {
             GROUP BY t.id_transaksi, t.tanggal_transaksi;   
         ";
     
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':idx', $idx, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

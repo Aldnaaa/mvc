@@ -41,51 +41,53 @@
               </div>
             </div>
           </div>
-          <table class="ms-4 mt-2">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Gambar</th>
-                <th>Nama</th>
-                <th>Harga Beli</th>
-                <th>Harga Jual</th>
-                <th>Supplier</th>
-                <th>Stock</th>
-                <th>Option</th>
-              </tr>
-            </thead>
-            <tbody>
-            <?php
-            $no = 1;
-            foreach ($data['barang'] as $item) { ?>
-            <tr>
-              <td><?php echo $no++; ?></td>
-              <td><img src='uploads/<?php echo $item['gambar']; ?>' alt='' style='width: 4rem' class='rounded-3' /></td>
-              <td><?php echo $item['nama_barang']; ?></td>
-              <td>Rp. <?php echo number_format($item['harga_beli']); ?></td>
-              <td>Rp. <?php echo number_format($item['harga_jual']); ?></td>
-              <?php
-              $supplierName = "";
-              foreach ($data['suppliers'] as $supplier) {
-                  if ($supplier['id_supplier'] == $item['id_supplier']) {
-                      $supplierName = $supplier['nama_supplier'];
-                      break;
-                  }
-              }
-              ?>
-              <td><?php echo $supplierName; ?></td>
-              <td><?php echo $item['stok_barang']; ?></td>
-              <td>
-                <a href="#" class='edit' data-bs-toggle="modal" data-bs-target="#editModal" data-id="<?= $item['id_barang']; ?>">Edit</a>
-                <!-- <a href="<?= BASEURL; ?>/mahasiswa/hapus/<?= $mhs['id'];?>" class='edit'>Edit</a> -->
-                <a href="<?= BASEURL; ?>/dataBarang/deleteBarang/<?= $item['id_barang'];?>" class='hapus' onclick='return confirm("Hapus Data Barang ?");'>Delete</a>
-              </td>
-            </tr>
-            <?php
-          }
-          ?>
-          </tbody>
-        </table>
+          <div class="table-responsive mx-4 me-5">
+                <table class="mt-2 table table-secondary table-bordered">
+                    <thead>
+                    <tr class="table-light">
+                        <th>No</th>
+                        <th>Gambar</th>
+                        <th>Nama</th>
+                        <th>Harga Beli</th>
+                        <th>Harga Jual</th>
+                        <th>Supplier</th>
+                        <th>Stock</th>
+                        <th>Option</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $no = 1;
+                    foreach ($data['barang'] as $item) { ?>
+                    <tr>
+                    <td><?php echo $no++; ?></td>
+                    <td><img src='uploads/<?php echo $item['gambar']; ?>' alt='' style='width: 4rem' class='rounded-3' /></td>
+                    <td><?php echo $item['nama_barang']; ?></td>
+                    <td>Rp. <?php echo number_format($item['harga_beli']); ?></td>
+                    <td>Rp. <?php echo number_format($item['harga_jual']); ?></td>
+                    <?php
+                    $supplierName = "";
+                    foreach ($data['suppliers'] as $supplier) {
+                        if ($supplier['id_supplier'] == $item['id_supplier']) {
+                            $supplierName = $supplier['nama_supplier'];
+                            break;
+                        }
+                    }
+                    ?>
+                    <td><?php echo $supplierName; ?></td>
+                    <td><?php echo $item['stok_barang']; ?></td>
+                    <td>
+                        <a href="#" class='edit' data-bs-toggle="modal" data-bs-target="#editModal" data-id="<?= $item['id_barang']; ?>">Edit</a>
+                        <!-- <a href="<?= BASEURL; ?>/mahasiswa/hapus/<?= $mhs['id'];?>" class='edit'>Edit</a> -->
+                        <a href="<?= BASEURL; ?>/dataBarang/deleteBarang/<?= $item['id_barang'];?>" class='hapus' onclick='return confirm("Hapus Data Barang ?");'>Delete</a>
+                    </td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                </tbody>
+            </table>
+          </div>
       </div>
     </div>
 
@@ -203,35 +205,34 @@
   </div>
 
   <script>
-$(document).ready(function () {
-   $("#editModal").on("shown.bs.modal", function () {
-       $("a.edit").on("click", function (e) {
-           e.preventDefault(); // Prevent the default behavior of the anchor tag
+    $(document).ready(function () {
+    $("#editModal").on("shown.bs.modal", function () {
+        $("a.edit").on("click", function (e) {
+            e.preventDefault(); // Prevent the default behavior of the anchor tag
 
-           var id = $(this).data("id");
+            var id = $(this).data("id");
 
-           $.ajax({
-               url: '<?= BASEURL; ?>/DataBarang/getBarangById/' + id,
-               method: 'GET',
-               dataType: 'json',
-               success: function (data) {
-                  // Populate the form fields with received data
-                  $('#idBarang-edit').val(data.id_barang);
-                  $('#nama-barang-edit').val(data.nama_barang);
-                  $('#kategori-edit').val(data.id_kategori);
-                  $('#harga-beli-edit').val(data.harga_beli);
-                  $('#harga-jual-edit').val(data.harga_jual);
-                  $('#supplier-edit').val(data.id_supplier);
-                  $('#stock-edit').val(data.stok_barang);
-               },
-               error: function (xhr, status, error) {
-                  console.error(xhr.responseText);
-                  // Handle error (e.g., display an alert, log to console, etc.)
-               }
-           });
-       });
-   });
-});
-
+            $.ajax({
+                url: '<?= BASEURL; ?>/DataBarang/getBarangById/' + id,
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    // Populate the form fields with received data
+                    $('#idBarang-edit').val(data.id_barang);
+                    $('#nama-barang-edit').val(data.nama_barang);
+                    $('#kategori-edit').val(data.id_kategori);
+                    $('#harga-beli-edit').val(data.harga_beli);
+                    $('#harga-jual-edit').val(data.harga_jual);
+                    $('#supplier-edit').val(data.id_supplier);
+                    $('#stock-edit').val(data.stok_barang);
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    // Handle error (e.g., display an alert, log to console, etc.)
+                }
+            });
+        });
+    });
+    });
 </script>
 

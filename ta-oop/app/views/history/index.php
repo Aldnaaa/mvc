@@ -16,7 +16,7 @@
               <option value="">Supplier</option>
                 <?php
                 // $dataSup = $supplier->getSuppliers();
-                foreach ($data as $item){
+                foreach ($data['suppliers'] as $item){
                   echo '<option value="'.$item['id_supplier'].'">'.$item['nama_supplier'].'</option>';
                 }        
                 ?>
@@ -51,103 +51,76 @@
             
             </div>
           </div>
-          <table class="ms-4 mt-2">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Date</th>
-                <th style="width: 30%">Nama Barang</th>
-                <th>Total Beli</th>
-                <th>Total Harga</th>
-                <th>Jumlah</th>
-                <th>Option</th>
-              </tr>
-            </thead>
-            <tbody>
-            <?php
-            //   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter2'])) {
-            //     $month = $_POST['bulan'];
-            //     $years = $_POST['tahun'];
-            
-            //     if ($month != 13 && $years != 1) {
-            //         $historyArray = $history->searchHistoryByMonthYear($month, $years);
-            //     } elseif ($month < 13 && $years == 1) {
-            //         $historyArray = $history->searchHistoryByMonth($month);
-            //     } elseif ($month == 13 && $years != 1) {
-            //         $historyArray = $history->searchHistoryByYear($years);
-            //     } else {
-            //       $historyArray = $history->getHistory();
-            //     }
-            //   }         
+          <div class="table-responsive mx-4 me-5">
+            <table class="mt-2 table table-secondary table-bordered">
+              <thead>
+                <tr class="table-light"> 
+                  <th>No</th>
+                  <th>Date</th>
+                  <th style="width: 27%">Nama Barang</th>
+                  <th>Total Beli</th>
+                  <th>Total Harga</th>
+                  <th>Jumlah</th>
+                  <th>Option</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php
+                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter1'])) {
+                  $no = 1;
+                  $jumlahBeli = 0;
+                  $jumlahJual = 0;
               
-            //   else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter1'])) {
-            //     $id = $_POST['supplier'];
-            //     $date = $_POST['date'];
-
-            //     if ($date != null  && $id != "") {
-            //       $historyArray = $history->getHistoryBySupplierDate($date, $id);
-            //     } elseif ($id != "") { 
-            //       $historyArray = $history->getHistoryBySupplier($id);
-            //     } elseif ($date != null){
-            //       $historyArray = $history->getHistoryByDate($date);
-            //     } else {
-            //       $historyArray = $history->getHistory();
-            //     } 
-            //   } else {
-            //     $historyArray = $history->getHistory();
-            //   }
-
-
-
-              
-    //           if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter1']) && $historyArray != $history->getHistory()) {
-    //             $no = 1;
-    //             $jumlahBeli = 0;
-    //             $jumlahJual = 0;
-    //             foreach ($historyArray as $item) {
-    //               echo "<tr>";
-    //               echo "<td>" . $no++ . "</td>";
-    //               echo "<td>". $item['tanggal_transaksi'] ."</td>";
-    //               echo "<td>" . $item['nama_barang'] . "</td>";
-    //               echo "<td>Rp. ". number_format($item['harga_beli']) ."</td>";
-    //               echo "<td>Rp. ". number_format($item['harga_jual']) ."</td>";
-    //               echo "<td>". $item['total_qty'] . "</td>";
-    //               echo "<td><a href='admin/fungsi/detailHistory.php?action=detail&id=" . $item['id_transaksi'] . "' class='edit'>Detail</a></td>";
-    //               echo "</tr>";
-    //               $jumlahBeli += $item['harga_beli'];
-    //               $jumlahJual += $item['harga_jual'];
-    //             }
-    //             echo "<tr>";
-    //             echo "<td></td>";
-    //             echo "<td></td>";
-    //             echo "<td>Total Penjualan : </td>";
-    //             echo "<td>Rp. ".number_format($jumlahBeli)."</td>";
-    //             echo "<td>Rp. ".number_format($jumlahJual)."</td>";
-    //             echo "</tr>";
-    //             echo "<tr>";
-    //             echo "<td></td>";
-    //             echo "<td></td>";
-    //             echo "<td>Total Keuntungan : </td>";
-    //             echo "<td>Rp. ".number_format($jumlahJual - $jumlahBeli)."</td>";
-    //             echo "<td></td>";
-    //             echo "</tr>";
-    //           } else {
-    //             $no = 1;
-    //             foreach ($historyArray as $item) {
-    //               echo "<tr>";
-    //               echo "<td>" . $no++ . "</td>";
-    //               echo "<td>". $item['tanggal_transaksi'] ."</td>";
-    //               echo "<td>" . $item['nama_barang'] . "</td>";
-    //               echo "<td>Rp. " . number_format($item['total_beli']) . "</td>";
-    //               echo "<td>Rp. " . number_format($item['total_transaksi']) . "</td>";
-    //               echo "<td>" . $item['total_qty'] . "</td>";
-    //               echo "<td><a href='admin/fungsi/detailHistory.php?action=detail&id=" . $item['id_transaksi'] . "' class='edit'>Detail</a></td>";
-    //               echo "</tr>";
-    //             }
-    //           }
-    //           ?>
-             </tbody>
-           </table>
+                  foreach ($data['history'] as $item) {
+                      ?>
+                      <tr class="bg-secondary">
+                          <td><?php echo $no++; ?></td>
+                          <td><?php echo $item['tanggal_transaksi']; ?></td>
+                          <td><?php echo $item['nama_barang']; ?></td>
+                          <td>Rp. <?php echo number_format($item['harga_beli']); ?></td>
+                          <td>Rp. <?php echo number_format($item['harga_jual']); ?></td>
+                          <td><?php echo $item['total_qty']; ?></td>
+                          <td><a href='admin/fungsi/detailHistory.php?action=detail&id=<?php echo $item['id_transaksi']; ?>' class='edit'>Detail</a></td>
+                      </tr>
+                      <?php
+                      $jumlahBeli += $item['harga_beli'];
+                      $jumlahJual += $item['harga_jual'];
+                  }
+                  ?>
+                  <tr>
+                      <td  colspan="3">Total Penjualan :</td>
+                      <td>Rp. <?php echo number_format($jumlahBeli); ?></td>
+                      <td>Rp. <?php echo number_format($jumlahJual); ?></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td class="table-success" colspan="3">Total Keuntungan :</td>
+                      <td class="table-success"colspan="2" >Rp. <?php echo number_format($jumlahJual - $jumlahBeli); ?></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <?php
+                    } else {
+                        $no = 1;
+                        foreach ($data['history'] as $item) {
+                            ?>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $item['tanggal_transaksi']; ?></td>
+                                <td><?php echo $item['nama_barang']; ?></td>
+                                <td>Rp. <?php echo number_format($item['total_beli']); ?></td>
+                                <td>Rp. <?php echo number_format($item['total_transaksi']); ?></td>
+                                <td><?php echo $item['total_qty']; ?></td>
+                                <td><a href='admin/fungsi/detailHistory.php?action=detail&id=<?php echo $item['id_transaksi']; ?>' class='edit'>Detail</a></td>
+                            </tr>
+                            <?php
+                        }
+                    }
+      //           ?>
+              </tbody>
+            </table>
+          </div>
          </div>
        </div>
      </main>

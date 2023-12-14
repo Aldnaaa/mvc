@@ -45,15 +45,6 @@ class BarangModel
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $data;
-//        if ($result) {
-//            $data = array();
-//            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-//                $data[] = $row;
-//            }
-//            return $data;
-//        } else {
-//            return array();
-//        }
     }
 
     public function deleteBarang($idBarang)
