@@ -115,7 +115,7 @@
                               <td><?php echo $item['total_qty']; ?></td>
                               <td>Rp. <?php echo number_format($item['harga_beli']); ?></td>
                               <td>Rp. <?php echo number_format($item['harga_jual']); ?></td>
-                              <td><a href='admin/fungsi/detailHistory.php?action=detail&id=<?php echo $item['id_transaksi']; ?>' class='edit'>Detail</a></td>
+                              <td><a href="#" class="edit" data-id="<?= $item['id_transaksi']; ?>" data-url="<?= BASEURL; ?>" data-bs-toggle="modal" data-bs-target="#detailModal">Detail</a></td>
                           </tr>
                           <?php
                           $jumlahBeli += $item['harga_beli'];
@@ -142,3 +142,41 @@
          </div>
        </div>
      </main>
+
+    <div class="modal fade" id="detailModal" aria-hidden="true" aria-labelledby="exampleModalLabel" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Detail Transaksi</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body border-bottom ps-5">
+                  <table id="detailTable">
+                      <thead>
+                          <tr>
+                              <th style="width: 34%" class="th-struk">Nama Barang</th>
+                              <th class="th-struk" style="width: 25%">Harga Barang</th>
+                              <th style="width: 16%" class="th-struk">Jumlah</th>
+                              <th class="th-struk" style="width: 18%">Total</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <!-- Data will be dynamically inserted here -->
+                      </tbody>
+                  </table>
+              </div>
+
+              <div class="modal-body d-flex justify-content-end">
+                  <table>
+                      <tr>
+                          <td>Total Harga:</td>
+                          <td id="totalHarga">Rp. 0</td>
+                      </tr>
+                  </table>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+    </div>

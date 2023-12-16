@@ -42,4 +42,18 @@ class History extends Controller
         $this->view('history/index',$data);
         $this->view('template/footer');
     }
+
+    public function detailHistory()
+    {
+      // Check if the request is an AJAX request
+      if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_transaksi'])) {
+          $id_transaksi = $_POST['id_transaksi'];
+
+          // Fetch details from the model
+          $details = $this->model('HistoryModel')->getDetailHistoryById($id_transaksi);
+
+          // Return the details as JSON
+          echo json_encode($details);
+      }
+    }
 }

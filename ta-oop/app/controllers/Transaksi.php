@@ -125,22 +125,27 @@ class Transaksi extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bayar'])) {
             // Get the money paid by the user
             $uangBayar = isset($_POST['uangBayar']) ? $_POST['uangBayar'] : 0;
-    
+
             // Check if the cart is not empty
             if (!empty($_SESSION["cart"])) {
                 // Calculate total price using the function
                 $totalPrice = $this->calculateTotalPrice($_SESSION["cart"]);
-    
+
                 // Check if the payment is sufficient
                 if ($uangBayar >= $totalPrice) {
                     // Perform the transaction and insert data into the database
-    
-                    // Step 1: Insert into 'transaksi' table
                     $idUser = 2; // Replace with the actual user ID
-                    $totalTransaksi = $totalPrice;
-    
-                    $idTransaksi = $this->model('TransaksiModel')->addTransaksi($idUser, $totalTransaksi);
-    
+
+                    // Create an array of data to be passed to the model
+                    $transactionData = [
+                        'idUser' => $idUser,
+                        'totalTransaksi' => $totalPrice,
+                        'uangBayar' => $uangBayar,
+                    ];
+
+                    // Call the model method to add the transaction
+                    $result = $this->model('TransaksiModel')->addTransaction($transactionData);
+
                     // Step 2: Insert into 'detail_transaksi' table for each item in the cart
                     foreach ($_SESSION["cart"] as $cartItem) {
                         $idBarang = $cartItem["id_barang"];
@@ -150,27 +155,58 @@ class Transaksi extends Controller
                         $this->model('BarangModel')->updateStock($idBarang, $quantity);
     
                         // Insert into 'detail_transaksi' table
-                        $this->model('TransaksiModel')->addDetailTransaksi($idBarang, $idTransaksi, $quantity);
+                        $this->model('TransaksiModel')->addDetailTransaksi($idBarang, $result['idTransaksi'], $quantity);
                     }
-    
-                    // Store values in session
-                    $_SESSION['last_transaction_id'] = $idTransaksi;
-                    $_SESSION['totalTunai'] = $uangBayar;
-    
-                    // Clear the entire shopping cart
-                    $_SESSION["cart"] = array();
-    
-                    header("Location: strukCart.php");
-                    exit();
+
+                    if ($result['success']) {
+                        // Store values in session
+                        $_SESSION['last_transaction_id'] = $result['idTransaksi'];
+                        $_SESSION['totalTunai'] = $uangBayar;
+
+                        // Clear the entire shopping cart
+                        $_SESSION["cart"] = array();
+
+                        // Return a JSON response
+                        echo json_encode(['success' => true, 'message' => 'Transaction successful']);
+                    } else {
+                        // Return an error JSON response
+                        echo json_encode(['success' => false, 'message' => $result['message']]);
+                    }
                 } else {
-                    echo '<script>alert("Uang Anda Kurang."); window.location.href = "../../index.php?page=transaksi";</script>';
-                    exit();
+                    // Return an error JSON response
+                    echo json_encode(['success' => false, 'message' => 'Insufficient funds']);
                 }
             } else {
-                // Display an error message if the cart is empty
-                echo '<script>alert("Anda belum menambahkan barang."); window.location.href = "../../index.php?page=transaksi";</script>';
+                // Return an error JSON response
+                echo json_encode(['success' => false, 'message' => 'Cart is empty']);
             }
+
+            // Ensure that no additional output is sent
+            die();
         }
     }
+
+    public function strukTransaksi()
+    {
+        // Check if 'last_transaction_id' is set in the session
+        if (!isset($_SESSION['last_transaction_id'])) {
+            // Handle the case where 'last_transaction_id' is not set
+            echo json_encode(['error' => 'Transaction ID not found']);
+            return;
+        }
+
+        $idTransaksi = $_SESSION['last_transaction_id'];
+
+        // Fetch details from the model
+        $struk = $this->model('TransaksiModel')->getStrukById($idTransaksi);
+
+        // Return the details as JSON
+        echo json_encode($struk);
+    }
+
+
+    
+
+
     
 }

@@ -17,7 +17,7 @@
         referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
