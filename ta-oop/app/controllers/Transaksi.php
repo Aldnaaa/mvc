@@ -2,6 +2,15 @@
 
 class Transaksi extends Controller
 {
+    public function __construct () {
+
+		// Jika belum login maka jangan biarkan user masuk
+		if ( !isset($_SESSION["level"]) && !isset($_SESSION["user_session"])) {
+            header("Location: http://localhost/mvc/ta-oop/public");
+			exit;
+		}
+	}
+    
     public function index()
     {
         $this->view('template/header');

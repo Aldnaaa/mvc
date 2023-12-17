@@ -3,11 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
-    <meta name="generator" content="Hugo 0.118.2" />
-    <title>Sidebars · Bootstrap v5.3</title>
-
+    <title>Simacan</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/" />
     <link
         rel="stylesheet"
@@ -19,10 +15,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="../public/assets/image/logo.png">
 
     <!-- Custom styles for this template -->
     <link href="assets/style/sidebars.css" rel="stylesheet" />
-    <link href="assets/style/sign-in.css" rel="stylesheet"/>
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">

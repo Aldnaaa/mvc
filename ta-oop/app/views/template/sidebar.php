@@ -52,7 +52,7 @@
     <hr class="text-white" />
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2" />
+            <img src="assets/image/avatar.svg" alt="" width="32" height="32" class="rounded-circle me-2" />
             <?php
             if ($_SESSION['level'] == 1) {
                 echo '<strong>Pemilik</strong>';
