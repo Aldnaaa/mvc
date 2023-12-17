@@ -10,13 +10,13 @@ $(".edit").on("click", function () {
     success: function (data) {
       console.log(data);
       // Populate the modal with data
-      populateModalWithData(data);
+      populateModalWithDataDetail(data);
     },
   });
 });
 
 // Function to populate modal with data
-function populateModalWithData(data) {
+function populateModalWithDataDetail(data) {
   const tbody = $("#detailTable tbody");
   const totalHargaElement = $("#totalHarga");
 

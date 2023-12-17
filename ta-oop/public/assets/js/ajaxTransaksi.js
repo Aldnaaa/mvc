@@ -50,7 +50,7 @@ function fetchTransactionDetails(idTransaksi) {
     dataType: "json",
     success: function (data) {
       // Populate the modal with data
-      populateModalWithData(data);
+      populateModalWithDataTransaksi(data);
       // Open the modal with ID "strukModal"
       $("#strukModal").modal("show");
     },
@@ -58,7 +58,7 @@ function fetchTransactionDetails(idTransaksi) {
 }
 
 // Function to populate modal with data
-function populateModalWithData(data) {
+function populateModalWithDataTransaksi(data) {
   const tbody = $("#strukTable tbody");
   const totalHargaElement = $("#totalHarga");
   const totalTunaiElement = $("#totalTunai");
