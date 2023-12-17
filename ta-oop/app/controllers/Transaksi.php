@@ -10,7 +10,7 @@ class Transaksi extends Controller
 			exit;
 		}
 	}
-    
+
     public function index()
     {
         $this->view('template/header');
@@ -148,7 +148,6 @@ class Transaksi extends Controller
                     // Create an array of data to be passed to the model
                     $transactionData = [
                         'idUser' => $idUser,
-                        'totalTransaksi' => $totalPrice,
                         'uangBayar' => $uangBayar,
                     ];
 

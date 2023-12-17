@@ -17,7 +17,7 @@
       </div>
       <div class="login-content">
         <div class="content-wrap">
-          <form action ="<?= BASEURL; ?>/login/signIn" method="post">
+          <form action ="<?= BASEURL; ?>/Login/signIn" method="post">
           <h3 class="title mb-4">Login Simacan</h3>
             <div class="input-div one">
               <div class="i">
