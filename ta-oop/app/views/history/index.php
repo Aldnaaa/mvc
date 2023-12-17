@@ -82,7 +82,6 @@
                           <td><?php echo $item['total_qty']; ?></td>
                           <td>Rp. <?php echo number_format($item['harga_beli']); ?></td>
                           <td>Rp. <?php echo number_format($item['harga_jual']); ?></td>
-                          <!-- <td><a href='admin/fungsi/detailHistory.php?action=detail&id=<?php echo $item['id_transaksi']; ?>' class='edit'>Detail</a></td> -->
                       </tr>
                       <?php
                       $jumlahBeli += $item['harga_beli'];
@@ -93,12 +92,10 @@
                       <td class="table-success" colspan="4">Total Penjualan :</td>
                       <td class="table-success">Rp. <?php echo number_format($jumlahBeli); ?></td>
                       <td class="table-success">Rp. <?php echo number_format($jumlahJual); ?></td>
-                      <!-- <td></td> -->
                   </tr>
                   <tr>
                     <td class="bg-success-subtle" colspan="4">Total Keuntungan :</td>
                     <td class="bg-success text-white"colspan="2" >Rp. <?php echo number_format($jumlahJual - $jumlahBeli); ?></td>
-                    <!-- <td></td> -->
                   </tr>
                   <?php 
                     } else {
@@ -151,22 +148,24 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body border-bottom ps-5">
-                  <table id="detailTable">
-                      <thead>
-                          <tr>
-                              <th style="width: 34%" class="th-struk">Nama Barang</th>
-                              <th class="th-struk" style="width: 25%">Harga Barang</th>
-                              <th style="width: 16%" class="th-struk">Jumlah</th>
-                              <th class="th-struk" style="width: 18%">Total</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <!-- Data will be dynamically inserted here -->
-                      </tbody>
-                  </table>
+                <div class="table-responsive">
+                    <table id="detailTable" class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th style="width: 34%" class="th-struk">Nama Barang</th>
+                                <th class="th-struk" style="width: 25%">Harga Barang</th>
+                                <th style="width: 16%" class="th-struk">Jumlah</th>
+                                <th class="th-struk" style="width: 18%">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
               </div>
 
-              <div class="modal-body d-flex justify-content-end">
+              <div class="modal-body d-flex justify-content-end me-2">
                   <table>
                       <tr>
                           <td>Total Harga:</td>

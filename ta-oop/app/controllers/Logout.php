@@ -1,8 +1,8 @@
 <?php
-if(session_status() === PHP_SESSION_NONE)
-    session_start();
-
-session_destroy();
-
-header('location:Login.php');
-?>
+class Logout {
+	public function index () {
+		session_destroy();
+		header('location:Login.php');
+		exit;
+	}
+}

@@ -54,22 +54,6 @@ class DataBarang extends Controller
         }
     }
 
-
-    // public function editBarang(){
-    //     if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
-    //         $id_barang = $_GET['id'];
-
-    //         // Ambil data barang berdasarkan ID
-    //         $data_barang = $this->model('BarangModel')->getBarangById($id_barang);
-
-    //         if (!$data_barang) {
-    //             echo "Barang tidak ditemukan.";
-    //             exit();
-    //         }
-    //     }
-    // }
-
-
     public function deleteBarang($id){
         $idBarangToDelete = $id;
 

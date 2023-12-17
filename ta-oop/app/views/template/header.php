@@ -22,6 +22,7 @@
 
     <!-- Custom styles for this template -->
     <link href="assets/style/sidebars.css" rel="stylesheet" />
+    <link href="assets/style/sign-in.css" rel="stylesheet"/>
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">

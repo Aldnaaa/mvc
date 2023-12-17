@@ -6,7 +6,6 @@ class HistoryModel {
         $this->db = new Database;
     }
 
-    // Metode lain tetap sama
 
     public function getHistory() {
         $sql = "  

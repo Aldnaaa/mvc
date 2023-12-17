@@ -200,22 +200,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body border-bottom ps-5">
-                    <table id="strukTable">
-                        <thead>
-                            <tr>
-                                <th style="width: 34%" class="th-struk">Nama Barang</th>
-                                <th class="th-struk" style="width: 25%">Harga Barang</th>
-                                <th style="width: 16%" class="th-struk">Jumlah</th>
-                                <th class="th-struk" style="width: 18%">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Data will be dynamically added here using JavaScript -->
-                        </tbody>
-                    </table>
+                  <div class="table-responsive">
+                      <table id="strukTable" class="table table-borderless">
+                          <thead>
+                              <tr>
+                                  <th style="width: 34%" class="th-struk">Nama Barang</th>
+                                  <th class="th-struk" style="width: 25%">Harga Barang</th>
+                                  <th style="width: 16%" class="th-struk">Jumlah</th>
+                                  <th class="th-struk" style="width: 18%">Total</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <!-- Data will be dynamically added here using JavaScript -->
+                          </tbody>
+                      </table>
+                  </div>
                 </div>
 
-                <div class="modal-body d-flex justify-content-end">
+                <div class="modal-body d-flex justify-content-end me-3">
                     <table>
                         <tr>
                             <td>Total Harga:</td>
@@ -238,160 +240,4 @@
         </div>
       </div>
 
-      
-
-
-      <!-- <div class="modal fade" id="strukModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Struk Transaksi</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body border-bottom ps-5">
-              <table>
-                <thead>
-                  <tr>
-                    <th style="width: 34%" class="th-struk">Nama Barang</th>
-                    <th class="th-struk" style="width: 25%">Harga Barang</th>
-                    <th style="width: 16%" class="th-struk">Jumlah</th>
-                    <th class="th-struk" style="width: 18%">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Nasgor Biasa</td>
-                    <td>Rp. 10.000</td>
-                    <td>2</td>
-                    <td>Rp. 200.000</td>
-                  </tr>
-                    <td>Nasgor Biasa</td>
-                    <td>Rp. 10.000</td>
-                    <td>2</td>
-                    <td>Rp. 200.000</td>
-                  </tr>
-                    <td>Nasgor Biasa</td>
-                    <td>Rp. 10.000</td>
-                    <td>2</td>
-                    <td>Rp. 200.000</td>
-                  </tr>
-                    <td>Nasgor Biasa</td>
-                    <td>Rp. 10.000</td>
-                    <td>2</td>
-                    <td>Rp. 200.000</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="modal-body d-flex justify-content-end">
-              <table>
-                  <tr>
-                    <td>Total Harga:</td>
-                    <td>Rp. 40.000</td>
-                  </tr>
-                  <tr>
-                    <td>Total Tunai:</td>
-                    <td>Rp. 50.000</td>
-                  </tr>
-                  <tr>
-                    <td>Kembalian:</td>
-                    <td>Rp. 10.000</td>
-                  </tr>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-      <!-- <div class="modal fade" id="bayarModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Proses Transaksi</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body d-flex flex-column align-items-center">
-              <p class="mb-2">Harga Total</p>
-              <h4 class="fw-bold"><?php echo "Rp. " . number_format($totalPrice); ?></h4>
-            </div>
-            <div class="modal-body">
-              <p class="mb-1">Uang yang dibayar</p>
-              <input type="text" class="form-control" id="uangBayar" />
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-danger" data-bs-target="#strukModal" data-bs-toggle="modal">Bayar</button>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-      <!-- <div class="modal fade" id="strukModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Struk Transaksi</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body border-bottom ps-5">
-              <table>
-                <thead>
-                  <tr>
-                    <th style="width: 34%" class="th-struk">Nama Barang</th>
-                    <th class="th-struk" style="width: 25%">Harga Barang</th>
-                    <th style="width: 16%" class="th-struk">Jumlah</th>
-                    <th class="th-struk" style="width: 18%">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Nasgor Biasa</td>
-                    <td>Rp. 10.000</td>
-                    <td>2</td>
-                    <td>Rp. 200.000</td>
-                  </tr>
-                    <td>Nasgor Biasa</td>
-                    <td>Rp. 10.000</td>
-                    <td>2</td>
-                    <td>Rp. 200.000</td>
-                  </tr>
-                    <td>Nasgor Biasa</td>
-                    <td>Rp. 10.000</td>
-                    <td>2</td>
-                    <td>Rp. 200.000</td>
-                  </tr>
-                    <td>Nasgor Biasa</td>
-                    <td>Rp. 10.000</td>
-                    <td>2</td>
-                    <td>Rp. 200.000</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="modal-body d-flex justify-content-end">
-              <table>
-                  <tr>
-                    <td>Total Harga:</td>
-                    <td>Rp. 40.000</td>
-                  </tr>
-                  <tr>
-                    <td>Total Tunai:</td>
-                    <td>Rp. 50.000</td>
-                  </tr>
-                  <tr>
-                    <td>Kembalian:</td>
-                    <td>Rp. 10.000</td>
-                  </tr>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </main>
