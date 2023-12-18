@@ -208,7 +208,7 @@
     </div>
     <?php } ?>
 
-  <script>
+  <!-- <script>
     $(document).ready(function () {
     $("#editModal").on("shown.bs.modal", function () {
         $("a.edit").on("click", function (e) {
@@ -238,5 +238,5 @@
         });
     });
     });
-</script>
+</script> -->
 

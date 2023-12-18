@@ -6,7 +6,7 @@ class Transaksi extends Controller
 
 		// Jika belum login maka jangan biarkan user masuk
 		if ( !isset($_SESSION["level"]) && !isset($_SESSION["user_session"])) {
-            header("Location: http://localhost/mvc/ta-oop/public");
+            header("Location: http://localhost/mvc/public");
 			exit;
 		}
 	}
@@ -175,18 +175,18 @@ class Transaksi extends Controller
                         $_SESSION["cart"] = array();
 
                         // Return a JSON response
-                        echo json_encode(['success' => true, 'message' => 'Transaction successful']);
+                        echo json_encode(['success' => true, 'message' => 'Transaksi Berhasil']);
                     } else {
                         // Return an error JSON response
                         echo json_encode(['success' => false, 'message' => $result['message']]);
                     }
                 } else {
                     // Return an error JSON response
-                    echo json_encode(['success' => false, 'message' => 'Insufficient funds']);
+                    echo json_encode(['success' => false, 'message' => 'Uang Anda Kurang']);
                 }
             } else {
                 // Return an error JSON response
-                echo json_encode(['success' => false, 'message' => 'Cart is empty']);
+                echo json_encode(['success' => false, 'message' => 'Keranjang Anda Kosong']);
             }
 
             // Ensure that no additional output is sent

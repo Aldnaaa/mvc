@@ -6,7 +6,7 @@ class Supplier extends Controller
 
 		// Jika belum login maka jangan biarkan user masuk
 		if ( !isset($_SESSION["level"]) && !isset($_SESSION["user_session"])) {
-            header("Location: http://localhost/mvc/ta-oop/public");
+            header("Location: http://localhost/mvc/public");
 			exit;
 		}
 	}

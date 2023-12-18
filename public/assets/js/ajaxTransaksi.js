@@ -17,13 +17,20 @@ $(document).ready(function () {
         // Check for success or error in the response
         if (data.success) {
           // Handle success case (e.g., show a success message)
-          showAlert("Transaction successful", "success");
-
+          Swal.fire({
+            title: "Transaction successful",
+            text: "Good job!",
+            icon: "success",
+          });
           // Fetch and display the transaction details in the modal
           fetchTransactionDetails(data.idTransaksi);
         } else {
           // Handle error case (e.g., display an error message)
-          showAlert(data.message, "error");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: data.message,
+          });
         }
       },
       error: function (xhr, status, error) {
@@ -41,7 +48,7 @@ $(document).ready(function () {
 
 // Function to fetch transaction details and display in the modal
 function fetchTransactionDetails(idTransaksi) {
-  const url = "http://localhost/mvc/ta-oop/public/Transaksi/strukTransaksi";
+  const url = "http://localhost/mvc/public/Transaksi/strukTransaksi";
 
   $.ajax({
     url: url,

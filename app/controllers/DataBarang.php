@@ -5,12 +5,12 @@ class DataBarang extends Controller
     public function __construct () {
 		// Jika belum login maka jangan biarkan user masuk
 		if ( !isset($_SESSION["level"]) && !isset($_SESSION["user_session"])) {
-            header("Location: http://localhost/mvc/ta-oop/public");
+            header("Location: http://localhost/mvc/public");
 			exit;
 		}
 	}
 
-    public function index($kategori = null)
+    public function index()
     {
         $this->view('template/header');
 
@@ -43,8 +43,6 @@ class DataBarang extends Controller
             $stock = $_POST['stock'];
             $fotoBarang = $_FILES['foto-barang']['name'];
 
-            // Lakukan validasi data jika diperlukan
-
             // Simpan foto ke direktori tertentu (misalnya 'uploads/')
             $targetDir = "../public/uploads/";
             $targetFile = $targetDir . basename($_FILES["foto-barang"]["name"]);
@@ -74,12 +72,6 @@ class DataBarang extends Controller
             // Tampilkan pesan gagal
             echo "Gagal menghapus barang";
         }
-    }
-
-    public function getBarangById($idBarang)
-    {
-        $barang = $this->model("BarangModel")->getBarangById($idBarang);
-        echo json_encode($barang);
     }
 
     public function updateBarang(){

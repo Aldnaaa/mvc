@@ -80,10 +80,6 @@
             </div>
           </div>
           
-
-
-
-          
           <!-- Baris di bawah adalah tempat di mana orderMenu.php akan diletakkan -->
           <div class="order-menu bg-white p-3 ms-0" style="width: 22%; height: 88%">
             <div class="header-order-menu border-bot">
@@ -143,30 +139,6 @@
             </div>
         </div>
       </div>
-
-      <!-- <div class="modal fade" id="bayarModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Proses Transaksi</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form method="POST" action="<?= BASEURL; ?>/Transaksi/checkout">
-                  <div class="modal-body d-flex flex-column align-items-center">
-                      <p class="mb-2">Harga Total</p>
-                      <h4 class="fw-bold"><?php echo "Rp. " . number_format($data['totalPrice']); ?></h4>
-                  </div>
-                  <div class="modal-body">
-                      <p class="mb-1">Uang yang dibayar</p>
-                      <input type="text" class="form-control" id="uangBayar" name="uangBayar" />
-                  </div>
-                  <div class="modal-footer">
-                      <button type="submit" class="btn btn-danger" data-bs-target="#strukModal" data-bs-toggle="modal" name="bayar">Bayar</button>
-                  </div>
-                  </form>
-              </div>
-        </div>
-      </div> -->
 
       <div class="modal fade" id="bayarModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">

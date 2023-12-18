@@ -1,6 +1,6 @@
 <?php
 
-define('BASEURL','http://localhost/mvc/ta-oop/public');
+define('BASEURL','http://localhost/mvc/public');
 //DB
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
