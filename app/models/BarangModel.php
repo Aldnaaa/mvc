@@ -38,8 +38,7 @@ class BarangModel
         // Ambil data barang dari database
         $sql = "SELECT * FROM barang";
         $stmt = $this->db->prepare($sql);
-//        $stmt = $this->db->prepare($query);
-        $result = $stmt->execute();
+        $stmt->execute();
         // Cek jika ada data
         $data = array();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -90,36 +89,6 @@ class BarangModel
         return $stmt->execute();
     }
     
-     
-
-
-//    public function searchDataBarang($searchTerm)
-//    {
-//        // Saring data barang berdasarkan nama_barang
-//        $sql = "SELECT * FROM barang WHERE nama_barang LIKE ?";
-//        $stmt = $this->db->prepare($sql);
-//
-//        // Tambahkan tanda persen (%) pada awal dan akhir search term untuk mencari nama_barang yang mengandung
-//        $searchTerm = "%$searchTerm%";
-//        $stmt->bind_param("s", $searchTerm);
-//
-//        // Eksekusi query
-//        $stmt->execute();
-//
-//        // Ambil hasil
-//        $result = $stmt->get_result();
-//
-//        // Cek jika ada data
-//        if ($result->num_rows > 0) {
-//            $data = array();
-//            while ($row = $result->fetch_assoc()) {
-//                $data[] = $row;
-//            }
-//            return $data;
-//        } else {
-//            return array();
-//        }
-//    }
     public function searchDataBarang($searchTerm)
     {
         // Saring data barang berdasarkan nama_barang
@@ -153,17 +122,6 @@ class BarangModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
-//    public function getJenisBarang()
-//    {
-//        $query = "SELECT COUNT(*) as total_rows FROM barang";
-//        $stmt = $this->db->prepare($query);
-//        $stmt->execute();
-//        $result = $stmt->get_result();
-//        $row = $result->fetch_assoc();
-//
-//        return $row['total_rows'];
-//    }
     public function getJenisBarang()
     {
         $query = "SELECT COUNT(*) as total_rows FROM barang";

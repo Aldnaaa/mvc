@@ -1,8 +1,5 @@
 <?php
 
-//namespace models;
-//use 'core/Database';
-
 class UserModel
 {
     private $db;
@@ -13,15 +10,6 @@ class UserModel
     }
 
     public function getUser($data){
-//        $username = $data['username'];
-//        $password = md5($data['password']);
-//        var_dump($data['username']);
-//        var_dump(md5($data['password']));
-//
-////        $sql = ;
-//        $result = $this->db->query("SELECT * FROM user WHERE username='$username' AND password='$password'");
-//        var_dump( $this->db->error);
-//        return $result;
         $username = $data['username'];
         $password = md5($data['password']);
 
