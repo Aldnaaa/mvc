@@ -62,18 +62,8 @@ class TransaksiModel {
         return $detailTransaksi;
     }
 
-    // public function getTotalTransaksiById($idTransaksi)
-    // {
-    //     $sql = "SELECT total_transaksi FROM transaksi WHERE id_transaksi = ?";
-    //     $stmt = $this->db->prepare($sql);
-    //     $stmt->execute([$idTransaksi]);
-    //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    //     return $row['total_transaksi'];
-    // }
-
     public function getTotalTransaksi() {
-        $query = "SELECT COUNT(*) as total_rows FROM transaksi";
+        $query = "SELECT COUNT(*) as total_rows FROM history_view";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
