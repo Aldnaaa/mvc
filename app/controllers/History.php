@@ -18,14 +18,14 @@ class History extends Controller
         $month = $_POST['bulan'];
         $years = $_POST['tahun'];
 
-        $data['history'] = $this->model('HistoryModel')->searchBawah($month, $years);
+        $data['history'] = $this->model('HistoryModel')->searchByMonthYear($month, $years);
         $data['total'] = $this->model('HistoryModel')->hitungTotal(0, '', $month, $years);
 
       } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter1'])) {
         $id = $_POST['supplier'];
         $date = $_POST['date'];
 
-        $data['history'] = $this->model('HistoryModel')->searchAtas($id,$date);
+        $data['history'] = $this->model('HistoryModel')->searchBySupplierDate($id,$date);
         $data['total'] = $this->model('HistoryModel')->hitungTotal($id, "$date", 0, 0);
 
       } else {

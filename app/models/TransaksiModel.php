@@ -7,21 +7,6 @@ class TransaksiModel {
         $this->db = new Database;
     }
 
-    // public function addTransaksi($idUser, $totalTransaksi) {
-    //     // Insert into 'transaksi' table
-    //     $tanggalTransaksi = date("Y-m-d H:i:s"); // Current date and time
-    
-    //     $insertTransaksiQuery = "INSERT INTO transaksi (id_user, total_transaksi, tanggal_transaksi) VALUES (:idUser, :totalTransaksi, :tanggalTransaksi)";
-    //     $stmt = $this->db->prepare($insertTransaksiQuery);
-    //     $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
-    //     $stmt->bindParam(':totalTransaksi', $totalTransaksi, PDO::PARAM_STR);
-    //     $stmt->bindParam(':tanggalTransaksi', $tanggalTransaksi, PDO::PARAM_STR);
-    //     $stmt->execute();
-    
-    //     // Get the last inserted ID (id_transaksi) using the Database class method
-    //     return $this->db->getLastInsertId();
-    // }    
-
     public function addTransaction($data)
     {
         // Insert into 'transaksi' table

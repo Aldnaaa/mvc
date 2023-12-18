@@ -20,12 +20,11 @@ class Login extends Controller{
                 $_SESSION['user_session'] = $result['id_user'];
                 $_SESSION['level'] = $result['level'];
 
-                echo '<script>alert("Login Sukses");</script>';
-                header("Location: ../Dashboard");
-                exit();
+                echo '<script>alert("Login Sukses");window.location="index.php"</script>'; 
             } else {
                 echo '<script>alert("Login Gagal");history.go(-1);</script>';
             }exit;
     }
+
 }
 

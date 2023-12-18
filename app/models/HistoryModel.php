@@ -17,7 +17,7 @@ class HistoryModel {
         return $result ? $result : array();
     }
 
-    public function searchAtas($id, $date) {
+    public function searchBySupplierDate($id, $date) {
         // $sql = "CALL search_history_atas(:id, :date);";
         $sql = "CALL search_history_atas($id, '$date');";
         $stmt = $this->db->prepare($sql);
@@ -30,7 +30,7 @@ class HistoryModel {
         }
     }
 
-    public function searchBawah($month, $year) {
+    public function searchByMonthYear($month, $year) {
         $sql = "CALL search_history_bawah($month, $year);";
         $stmt = $this->db->prepare($sql);
         

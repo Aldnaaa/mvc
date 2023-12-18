@@ -4,5 +4,6 @@
 <script src="assets/js/ajaxTransaksi.js"></script>
 <script src="assets/js/ajaxHistory.js"></script>
 <script src="assets/js/qty.js"></script>
+<script src="assets/js/alert.js"></script>
 </body>
 </html>

@@ -1,20 +1,18 @@
 <?php
 
-//namespace core;
-
 class Database 
 {
     public $error;
-    private $host = DB_HOST;
-    private $user = DB_USER;
-    private $pass = DB_PASS;
-    private $db_name = DB_NAME;
-    private $conn;
-    private $stmt;
+    private $_host = DB_HOST;
+    private $_user = DB_USER;
+    private $_pass = DB_PASS;
+    private $_db_name = DB_NAME;
+    private $_conn;
+    private $_stmt;
 
     public function __construct()
     {
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name;
+        $dsn = 'mysql:host=' . $this->_host . ';dbname=' . $this->_db_name;
 
         $options = [
             PDO::ATTR_PERSISTENT => true,
@@ -22,7 +20,7 @@ class Database
         ];
 
         try {
-            $this->conn = new PDO($dsn, $this->user, $this->pass, $options);
+            $this->_conn = new PDO($dsn, $this->_user, $this->_pass, $options);
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
             die($this->error);
@@ -32,7 +30,7 @@ class Database
     public function query($query)
     {
         try {
-            $this->stmt = $this->conn->prepare($query);
+            $this->_stmt = $this->_conn->prepare($query);
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
             die($this->error);
@@ -56,34 +54,37 @@ class Database
                     $type = PDO::PARAM_STR;
             }
         }
-        $this->stmt->bindValue($param, $value, $type);
+        $this->_stmt->bindValue($param, $value, $type);
     }
 
     public function execute()
     {
         try {
-            return $this->stmt->execute();
+            return $this->_stmt->execute();
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
             die($this->error);
         }
     }
+    
     public function resultSet()
     {
         $this->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->_stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function single()
     {
         $this->execute();
-        return $this->stmt->fetch(PDO::FETCH_ASSOC);
+        return $this->_stmt->fetch(PDO::FETCH_ASSOC);
     }
+
     public function prepare($query) {
-        return $this->conn->prepare($query);
+        return $this->_conn->prepare($query);
     }
 
     public function getLastInsertId()
     {
-        return $this->conn->lastInsertId();
+        return $this->_conn->lastInsertId();
     }
 }

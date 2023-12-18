@@ -38,10 +38,13 @@ class Supplier extends Controller
             $result = $this->model('SupplierModel')->tambahSupplier($supplierName,$supplierTelepon);
 
             if ($result) {
+                Flasher::setFlash('Data Supplier Berhasil Ditambahkan', 'Sukses', 'fas fa-check-circle', 'success');
                 header("Location: ../Supplier");
                 exit();
             } else {
-                echo "Gagal menambahkan data supplier.";
+                Flasher::setFlash('Data Supplier Gagal Ditambahkan', 'Gagal', 'fas fa-times-circle', 'danger');
+                header("Location: ../Supplier");
+                exit();
             }
         }
     }
@@ -51,12 +54,13 @@ class Supplier extends Controller
 
         // Memanggil method untuk menghapus barang
         if ($this->model('SupplierModel')->deleteSuppliers($idSupplierToDelete)) {
-            // Redirect atau tampilkan pesan berhasil
+            Flasher::setFlash('Data Supplier Berhasil Dihapus', 'Sukses', 'fas fa-check-circle', 'warning');
             header('Location: ' . BASEURL . '/Supplier');
             exit();
         } else {
-            // Tampilkan pesan gagal
-            echo "Gagal menghapus barang";
+            Flasher::setFlash('Data Supplier Gagal Ditambahkan', 'Gagal', 'fas fa-times-circle', 'danger');
+            header("Location: ../Supplier");
+            exit();
         }
     }
 
@@ -70,12 +74,13 @@ class Supplier extends Controller
             // Panggil method untuk memperbarui barang
             $this->model('SupplierModel')->updateSupplier($id_supplier, $nama_supplier,$telepon);
     
-            // Redirect atau tampilkan pesan berhasil
+            Flasher::setFlash('Data Supplier Berhasil Diedit', 'Sukses', 'fas fa-check-circle', 'success');
             header('Location: ' . BASEURL . '/Supplier');
             exit();
         } else {
-            // Tampilkan pesan gagal
-            echo "Akses tidak sah.";
+            Flasher::setFlash('Data Supplier Gagal Diedit', 'Gagal', 'fas fa-times-circle', 'danger');
+            header("Location: ../Supplier");
+            exit();
         }
     }
 }

@@ -51,11 +51,14 @@ class DataBarang extends Controller
             // Panggil method untuk menambahkan barang
             if ($this->model('BarangModel')->tambahBarang($namaBarang, $kategori,$hargaBeli, $hargaJual,$supplier, $stock, $fotoBarang)) {
                 // Redirect atau tampilkan pesan berhasil
+                Flasher::setFlash('Data Barang Berhasil Ditambahkan', 'Sukses', 'fas fa-check-circle', 'success');
                 header("Location: ../DataBarang");
                 exit();
             } else {
                 // Tampilkan pesan gagal
-                echo "Gagal menambah barang";
+                Flasher::setFlash('Data Barang Gagal Ditambahkan', 'Gagal', 'fas fa-times-circle', 'danger');
+                header("Location: ../DataBarang");
+                exit();
             }
         }
     }
@@ -66,11 +69,14 @@ class DataBarang extends Controller
         // Memanggil method untuk menghapus barang
         if ($this->model('BarangModel')->deleteBarang($idBarangToDelete)) {
             // Redirect atau tampilkan pesan berhasil
+            Flasher::setFlash('Data Barang Berhasil Dihapus', 'Sukses', 'fas fa-check-circle', 'warning');
             header('Location: ' . BASEURL . '/DataBarang');
             exit();
         } else {
             // Tampilkan pesan gagal
-            echo "Gagal menghapus barang";
+            Flasher::setFlash('Data Barang Gagal Dihapus', 'Gagal', 'fas fa-times-circle', 'danger');
+            header('Location: ' . BASEURL . '/DataBarang');
+            exit();
         }
     }
 
@@ -108,12 +114,13 @@ class DataBarang extends Controller
             // Panggil method untuk memperbarui barang
             $this->model('BarangModel')->updateBarang($idBarang, $namaBarang, $idKategori, $hargaBeli,$hargaJual,$supplier, $stokBarang, $gambarBarang);
     
-            // Redirect atau tampilkan pesan berhasil
+            Flasher::setFlash('Data Barang Berhasil Diedit', 'Sukses', 'fas fa-check-circle', 'success');
             header('Location: ' . BASEURL . '/DataBarang');
             exit();
         } else {
-            // Tampilkan pesan gagal
-            echo "Akses tidak sah.";
+            Flasher::setFlash('Data Barang Gagal Diedit', 'Gagal', 'fas fa-times-circle', 'danger');
+            header('Location: ' . BASEURL . '/DataBarang');
+            exit();
         }
     }
 

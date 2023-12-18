@@ -18,6 +18,7 @@
             </div>
           </div>
           <div class="table-responsive mx-4 me-5">
+          <?php Flasher::flash(); ?>
           <table class="mt-2 table table-secondary table-bordered">
             <thead>
               <tr class="table-light">
@@ -39,7 +40,7 @@
                         <td><?= $supplierData['tanggal_input']; ?></td>
                         <td>
                             <a href="#" class='edit ' data-bs-toggle="modal" data-bs-target="#editModal<?= $supplierData['id_supplier']; ?>" data-id="<?= $supplierData['id_supplier']; ?>">Edit</a>
-                            <a href="<?= BASEURL; ?>/supplier/deleteSupplier/<?= $supplierData['id_supplier'];?>" class='hapus' onclick='return confirm("Hapus Data Barang ?");'>Delete</a>
+                            <a href="<?= BASEURL; ?>/supplier/deleteSupplier/<?= $supplierData['id_supplier'];?>" class='hapus' onclick='return confirmDelete(event);'>Delete</a>
                         </td>
                     </tr>
                 <?php } ?>                

@@ -1,7 +1,5 @@
 <?php
 
-//namespace core;
-
 class Controller{
     public function view($view, $data = [] )
     {
