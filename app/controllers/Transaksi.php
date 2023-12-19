@@ -5,10 +5,13 @@ class Transaksi extends Controller
     public function __construct () {
 
 		// Jika belum login maka jangan biarkan user masuk
-		if ( !isset($_SESSION["level"]) && !isset($_SESSION["user_session"])) {
+		if ( !isset($_SESSION["level"]) && !isset($_SESSION["user_session"]) && $_SESSION["level"] === '2') {
             header("Location: http://localhost/mvc/public");
 			exit;
-		}
+		} else if ($_SESSION["level"] == 1) {
+            header("Location: http://localhost/mvc/public/Dashboard");
+            exit;
+        }
 	}
 
     public function index()
