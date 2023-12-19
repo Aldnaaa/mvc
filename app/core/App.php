@@ -1,6 +1,5 @@
 <?php
 
-
 class App {
     protected $controller = 'Login';
     protected $method = 'index';

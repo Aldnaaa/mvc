@@ -103,7 +103,7 @@
                     <form action="<?= BASEURL; ?>/DataBarang/tambahBarang" method="post" enctype="multipart/form-data" >
                         <div class="mb-1">
                             <label for="nama-barang" class="col-form-label">Nama Barang</label>
-                            <input type="text" class="form-control" id="nama-barang" name="nama-barang" />
+                            <input type="text" class="form-control" id="nama-barang" name="nama-barang" required/>
                         </div>
                         <div class="mb-1">
                             <label for="kategori" class="col-form-label">Kategori</label><br />
@@ -115,11 +115,11 @@
                         </div>
                         <div class="mb-1">
                             <label for="harga-beli" class="col-form-label">Harga Beli</label>
-                            <input type="text" class="form-control" id="harga-beli" name="harga-beli" />
+                            <input type="text" class="form-control" id="harga-beli" name="harga-beli" required/>
                         </div>
                         <div class="mb-1">
                             <label for="harga-jual" class="col-form-label">Harga Jual</label>
-                            <input type="text" class="form-control" id="harga-jual" name="harga-jual" />
+                            <input type="text" class="form-control" id="harga-jual" name="harga-jual" required/>
                         </div>
                         <div class="mb-1">
                             <label for="supplier" class="col-form-label">Supplier</label><br />
@@ -131,11 +131,11 @@
                         </div>
                         <div class="mb-1">
                             <label for="stock" class="col-form-label">Stock</label>
-                            <input type="text" class="form-control" id="stock" name="stock" />
+                            <input type="text" class="form-control" id="stock" name="stock" required/>
                         </div>
                         <div class="mb-1">
                             <label for="foto-barang" class="col-form-label">Foto</label>
-                            <input type="file" class="form-control" id="foto-barang" name="foto-barang" accept="image/*" />
+                            <input type="file" class="form-control" id="foto-barang" name="foto-barang" accept="image/*"/>
                         </div>
                         <div class="mb-1 d-flex justify-content-end mt-3 gap-2">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>

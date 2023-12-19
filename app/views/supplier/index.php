@@ -62,11 +62,11 @@
                     <input type='hidden' name='id_supplier'>
                     <div class="mb-1">
                         <label for="nama-supplier" class="col-form-label">Nama Supplier</label>
-                        <input type='text' class="form-control" id="nama-supplier" name='nama-supplier'>
+                        <input type='text' class="form-control" id="nama-supplier" name='nama-supplier' required>
                     </div>
                     <div class="mb-1">
                         <label for="telepon" class="col-form-label">Nomor Telepon</label>
-                        <input type='text' class="form-control" id="telepon" name='telepon'>
+                        <input type='text' class="form-control" id="telepon" name='telepon' required>
                     </div>
                     <div class="mb-1 d-flex justify-content-end mt-3 gap-2">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
