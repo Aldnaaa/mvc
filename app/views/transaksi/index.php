@@ -67,7 +67,7 @@
                                 <button type="button" class="plus-items">+</button>
                             </div>
                             <?php if ($item['stok_barang'] > 0) : ?>
-                                <button type="submit" name="add_to_cart" class="btn bg-dongker py-0 rounded-3 mb-2 text-white add-transaksi mt-2" style="width:8rem">Add</button>
+                                <button type="submit" name="add_to_cart" class="btn bg-dongker py-0 rounded-3 text-white add-transaksi mt-2" style="width:7rem">Add</button>
                             <?php else : ?>
                                 <p class="p-0 pt-2 text-danger text-center">Stok Habis</p>
                             <?php endif; ?>

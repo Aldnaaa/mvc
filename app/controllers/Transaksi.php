@@ -6,10 +6,10 @@ class Transaksi extends Controller
 
 		// Jika belum login maka jangan biarkan user masuk
 		if ( !isset($_SESSION["level"]) && !isset($_SESSION["user_session"]) && $_SESSION["level"] === '2') {
-            header("Location: http://localhost/mvc/public");
+            header("Location:" .BASEURL);
 			exit;
 		} else if ($_SESSION["level"] == 1) {
-            header("Location: http://localhost/mvc/public/Dashboard");
+            header('Location: ' . BASEURL . '/Dashboard');
             exit;
         }
 	}

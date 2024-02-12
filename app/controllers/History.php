@@ -6,7 +6,7 @@ class History extends Controller
   public function __construct () {
 		// Jika belum login maka jangan biarkan user masuk
 		if ( !isset($_SESSION["level"]) && !isset($_SESSION["user_session"])) {
-            header("Location: http://localhost/mvc/public");
+      header("Location:" .BASEURL);
 			exit;
 		}
 	}

@@ -4,7 +4,7 @@ class Login extends Controller{
     public function __construct () {
 		// Jika sudah login maka biarkan user masuk
 		if ( isset($_SESSION["level"]) && isset($_SESSION["user_session"])) {
-            header("Location: http://localhost/mvc/public/Dashboard");
+            header("Location:" .BASEURL."/Dashboard");
 			exit;
 		}
 	}
